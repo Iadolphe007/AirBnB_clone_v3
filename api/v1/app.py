@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+"""app module"""
+
 from flask import Flask
 from models import storage
 from api.v1.views import app_views
@@ -12,6 +15,12 @@ app.register_blueprint(app_views)
 def teardown_storage(obj):
     """call the close ()"""
     storage.close()
+
+
+@app.errorhandler(404)
+def not_found(error):
+    response = jsonify({'error': 'Not Found'})
+    return response
 
 
 if __name__ == "__main__":
