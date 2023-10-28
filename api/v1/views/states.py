@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """state view"""
-
 from api.v1.views import app_views
 from flask import jsonify, abort, request, make_response
 from models import storage
@@ -32,7 +31,7 @@ def state(state_id):
 
 
 @app_views.route('/states/<sid>', strict_slashes=False, methods=['DELETE'])
-def state(sid):
+def state_delete(sid):
     """Delete a state"""
     states = storage.all(State).values()
     for state in states:
