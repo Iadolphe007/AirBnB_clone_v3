@@ -12,10 +12,10 @@ import json
 def state_cities(state_id):
     """returns all the cities of a state"""
     state = storage.get(State, state_id)
-    cities = state.cities
     if not state:
         abort(404)
     citiesList = []
+    cities = state.cities
     for city in cities:
         citiesList.append(city.to_dict())
     return jsonify(citiesList)
