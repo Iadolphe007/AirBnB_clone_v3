@@ -19,8 +19,7 @@ def teardown_storage(obj):
 
 @app.errorhandler(404)
 def not_found(error):
-    response = jsonify({'error': 'Not Found'})
-    return make_response(response, 404)
+    return make_response(jsonify({'error': 'Not Found'}), 404)
 
 
 if __name__ == "__main__":
