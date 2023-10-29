@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """app module"""
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, make_response
 from models import storage
 from api.v1.views import app_views
 import os
@@ -20,7 +20,7 @@ def teardown_storage(obj):
 @app.errorhandler(404)
 def not_found(error):
     response = jsonify({'error': 'Not Found'})
-    return response
+    return make_response(response, 404)
 
 
 if __name__ == "__main__":
