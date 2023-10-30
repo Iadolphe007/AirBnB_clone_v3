@@ -16,7 +16,7 @@ def get_review_by_place(place_id):
     place = storage.get(Place, place_id)
     if place is None:
         abort(404)
-    reviews = [review.to_dict() for review in place.reviews)
+    reviews = [review.to_dict() for review in place.reviews]
     return jsonify(reviews)
 
 
@@ -60,7 +60,7 @@ def create_review(place_id):
     if 'text' not in data:
         return make_response(jsonify({'error': 'Missing text'}), 400)
 
-    revire = Review(**data)
+    review = Review(**data)
     review.place_id = place_id
     review.save()
     return (jsonify(review.to_dict()), 201)
