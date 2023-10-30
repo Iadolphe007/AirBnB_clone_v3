@@ -3,6 +3,7 @@
 from api.v1.views import app_views
 from flask import jsonify, abort, request, make_response
 from models import storage
+from models.state import State
 from models.city import City
 from models.place import Place
 from models.user import User
@@ -80,3 +81,52 @@ def update_place(place_id):
             setattr(place, key, value)
     storage.save()
     return make_response(jsonify(place.to_dict()), 200)
+
+
+@app_views.route('/places_search', strict_slashes=False, methods=['POST'])
+def search_place():
+    data = request.get_json()
+    if not data:
+        return make_response(jsonify({"error": "Not a JSON"}), 400)
+    sList = data.get('states')
+    cList = data.get('cities')
+    aList = data.get('amenities')
+    placesList = []
+    placesWithAmenities = []
+    if (not data or (not sList and not cList and not aList)):
+        places = storage.all(Place).values()
+        for place in places:
+            placesList.append(place.to_dict())
+        return jsonify(placesList)
+    if sList:
+        for stateId in sList:
+            state = storage.get(State, stateId)
+            if not state:
+                abort(404)
+            cities = state.cities
+            for city in cities:
+                places = city.places
+                for place in places:
+                    placesList.append(place.to_dict())
+    if cList:
+        for cityId in cList:
+            city = storage.get(City, cityId)
+            if not city:
+                abort(404)
+            places = city.places
+            for place in places:
+                place = place.to_dict()
+                if place not in placesList:
+                    placesList.append(place)
+    if aList:
+        """check if each plave in placesList has all required amenities
+        in aList"""
+        for place in placesList:
+            place_id = place.get('id')
+            dbplace = storage.get(Place, place_id)
+            amenities = dbplace.amenities
+            for amenity in amenities:
+                if amenity.id in aList and place not in placesWithAmenities:
+                    placesWithAmenities.append(place)
+        return jsonify(placesWithAmenities)
+    return jsonify(placesList)
