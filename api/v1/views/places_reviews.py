@@ -42,7 +42,7 @@ def del_review(review_id):
 
 
 @app_views.route('/places/<place_id>/reviews', methods=['POST'],
-                strict_slashes=False)
+                 strict_slashes=False)
 def create_review(place_id):
     """create a review"""
     place = storage.get(Place, place_id)
@@ -67,7 +67,7 @@ def create_review(place_id):
 
 
 @app_views.route('/reviews/<string:review_id>', methods=['PUT'],
-                  strict_slashes=False)
+                 strict_slashes=False)
 def post_review(review_id):
     """update id"""
     review = storage.get(Review, review_id)
