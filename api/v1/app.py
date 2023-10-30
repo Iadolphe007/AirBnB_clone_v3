@@ -21,7 +21,7 @@ def teardown_storage(obj):
 @app.errorhandler(404)
 def not_found(error):
     """return 404 as json"""
-    response = jsonify({'error': 'Not Found'})
+    response = jsonify({"error": "Not found"})
     return make_response(response, 404)
 
 
