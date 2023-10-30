@@ -41,7 +41,7 @@ def del_review(review_id):
     return (jsonify({}), 200)
 
 
-@app_view.route('/places/<place_id>/reviews', methods=['POST'],
+@app_views.route('/places/<place_id>/reviews', methods=['POST'],
                 strict_slashes=False)
 def create_review(place_id):
     """create a review"""
@@ -66,7 +66,7 @@ def create_review(place_id):
     return (jsonify(review.to_dict()), 201)
 
 
-@@app_views.route('/reviews/<string:review_id>', methods=['PUT'],
+@app_views.route('/reviews/<string:review_id>', methods=['PUT'],
                   strict_slashes=False)
 def post_review(review_id):
     """update id"""
