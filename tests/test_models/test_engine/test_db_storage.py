@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Contains the TestDBStorageDocs and TestDBStorage classes
-"""
+"""Contains the TestDBStorageDocs and TestDBStorage classes"""
 
 from datetime import datetime
 import inspect
@@ -100,6 +98,7 @@ class TestFileStorage(unittest.TestCase):
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_get(self):
+        """test get function in dbstorage"""
         newState = State(name='test_State')
         models.storage._DBStorage__session.add(newState)
         models.storage._DBStorage__session.commit()
