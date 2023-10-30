@@ -34,6 +34,7 @@ def get_review(review_id):
                  strict_slashes=False)
 def del_review(review_id):
     """ delete a review """
+    review = storage.get(Review, review_id)
     if review is None:
         abort(404)
     storage.delete(review)
