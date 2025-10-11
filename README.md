@@ -86,17 +86,17 @@ flowchart LR
 	end
 
 	subgraph Storage
-		FILE[file storage (JSON)]
-		DB[(MySQL + SQLAlchemy)]
+		FILE[File storage JSON]
+		DB[MySQL via SQLAlchemy]
 	end
 
-	Browser -- HTTP --> API
-	Browser -- HTTP --> WEB
+	Browser --> API
+	Browser --> WEB
 	Script --> API
-	API <-- models.storage --> FILE
-	API <-- models.storage --> DB
-	WEB <-- models.storage --> FILE
-	WEB <-- models.storage --> DB
+	API --> FILE
+	API --> DB
+	WEB --> FILE
+	WEB --> DB
 ```
 
 ## Run modes
