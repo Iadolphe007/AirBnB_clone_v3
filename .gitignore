@@ -2,3 +2,9 @@ __pycache__
 __pycache__/
 *.json
 *~
+
+# virtual environment
+.venv/
+
+# environment file
+.env
