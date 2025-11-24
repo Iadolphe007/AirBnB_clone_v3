@@ -126,7 +126,7 @@ Run:
 ```bash
 export HBNB_API_HOST=0.0.0.0
 export HBNB_API_PORT=5000
-python3 api/v1/app.py
+python3 -m api.v1.app
 ```
 
 Quick smoke test:
@@ -141,7 +141,7 @@ curl -s http://127.0.0.1:5000/api/v1/stats | jq .
 Each file under `web_flask/` is a runnable script. Example:
 
 ```bash
-python3 web_flask/0-hello_route.py
+python3 -m web_flask.0-hello_route
 # then open http://127.0.0.1:5000/
 ```
 

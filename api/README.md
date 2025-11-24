@@ -9,7 +9,7 @@ export HBNB_API_HOST=0.0.0.0
 export HBNB_API_PORT=5000
 # Storage backend (default: file)
 export HBNB_TYPE_STORAGE=file  # or db
-python3 api/v1/app.py
+python3 -m api.v1.app
 ```
 
 > [!NOTE]
